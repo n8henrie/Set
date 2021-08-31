@@ -29,9 +29,6 @@ struct GameModel {
         }
         
         cards.shuffle()
-        for idx in 0..<12 {
-            cards[idx].visible = true
-        }
         self.cards = cards
     }
     
@@ -53,12 +50,12 @@ struct GameModel {
             }
         }
     }
-    //
-    //    mutating func createSetGame() {
-    //        for idx in 0..<12 {
-    //            cards[idx].visible = true
-    //        }
-    //    }
+    
+    mutating func createSetGame() {
+        for idx in 0..<12 {
+            cards[idx].visible = true
+        }
+    }
     
     func is_match() -> Bool {
         let selected_cards = cards.filter({ $0.selected })

@@ -14,7 +14,7 @@ struct ContentView: View {
         let visible_cards = viewModel.cards.filter { card in
             card.visible
         }
-
+        
         NavigationView {
             Grid(visible_cards) { card in
                 CardView(card: card)
@@ -24,10 +24,10 @@ struct ContentView: View {
                         viewModel.choose(card: card)
                     }
             }
+        }.onAppear {
+            viewModel.createSetGame()
         }
-//        }.onAppear {
-////            viewModel.createSetGame()
-//        }
+        
     }
     private func delayForCard(_ card: GameModel.Card) -> Double {
         if let idx = viewModel.cards.firstIndex(matching: card) {
@@ -37,7 +37,6 @@ struct ContentView: View {
     }
     private func randomOffset(for card: GameModel.Card) -> CGSize {
         if let idx = viewModel.cards.firstIndex(matching: card) {
-            print(idx)
             let w = Int.random(in: -100..<100) * idx
             let h = Int.random(in: -100..<100) * idx
             return CGSize(width: w, height: h)
@@ -49,7 +48,7 @@ struct ContentView: View {
 
 struct CardView: View {
     let card: GameModel.Card
-
+    
     var body: some View {
         GeometryReader { geometry in
             ZStack {
@@ -66,7 +65,7 @@ struct CardView: View {
             }.padding(5)
         }
     }
-
+    
     @ViewBuilder
     private func get_shape() -> some View {
         switch card.shape {
@@ -78,7 +77,7 @@ struct CardView: View {
             shade(s)
         }
     }
-
+    
     @ViewBuilder
     private func shade<T>(_ shape: T) -> some View
     where T: Shape {
@@ -89,7 +88,7 @@ struct CardView: View {
         case .striped: StripedShape(shape: shape, color: color, background: card_background_color)
         }
     }
-
+    
     func get_color() -> Color {
         switch card.color {
         case .red:
@@ -100,7 +99,7 @@ struct CardView: View {
             return .green
         }
     }
-
+    
     //        @ViewBuilder
     //        private func fill() -> some View {
     //            switch card.shading {
@@ -121,7 +120,7 @@ struct StripedShape<T>: View where T: Shape {
     let shape: T
     let color: Color
     let background: Color
-
+    
     var body: some View {
         GeometryReader { rect in
             let width = rect.size.width
@@ -135,7 +134,7 @@ struct StripedShape<T>: View where T: Shape {
             // expand size due to account for rotation
             .frame(width: width * 2, height: height * 2)
             .rotationEffect(Angle.degrees(45))
-
+            
             // restore initial size
             .frame(width: width, height: height)
             .clipShape(shape)

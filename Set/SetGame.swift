@@ -10,15 +10,15 @@ import SwiftUI
 
 class SetGame: ObservableObject {
     @Published private var model = GameModel()
-
-//    func createSetGame() {
-//        model.createSetGame()
-//    }
-
+    
+    func createSetGame() {
+        model.createSetGame()
+    }
+    
     var cards: Array<GameModel.Card>  {
         model.cards
     }
-
+    
     func choose(card: GameModel.Card) {
         model.choose(card: card)
     }
