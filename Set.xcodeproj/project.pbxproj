@@ -8,11 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		60774CEB267C385E002A256F /* SetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60774CEA267C385E002A256F /* SetApp.swift */; };
-		60774CED267C385E002A256F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60774CEC267C385E002A256F /* ContentView.swift */; };
+		60774CED267C385E002A256F /* SetGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60774CEC267C385E002A256F /* SetGameView.swift */; };
 		60774CEF267C3860002A256F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60774CEE267C3860002A256F /* Assets.xcassets */; };
 		60774CF2267C3860002A256F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60774CF1267C3860002A256F /* Preview Assets.xcassets */; };
 		60774CFD267C3860002A256F /* SetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60774CFC267C3860002A256F /* SetTests.swift */; };
 		60774D08267C3860002A256F /* SetUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60774D07267C3860002A256F /* SetUITests.swift */; };
+		60774D1A267C3D98002A256F /* SetGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60774D19267C3D98002A256F /* SetGame.swift */; };
+		60774D1C267C4CAA002A256F /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60774D1B267C4CAA002A256F /* GameModel.swift */; };
+		60774D1E267D7A64002A256F /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60774D1D267D7A64002A256F /* Grid.swift */; };
+		60774D20267D7A7F002A256F /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60774D1F267D7A7F002A256F /* GridLayout.swift */; };
+		60FA26BE2683AD7400E4A401 /* Array+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FA26BD2683AD7400E4A401 /* Array+Identifiable.swift */; };
+		60FA26C02683CA2800E4A401 /* CardShapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FA26BF2683CA2800E4A401 /* CardShapes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +41,7 @@
 /* Begin PBXFileReference section */
 		60774CE7267C385E002A256F /* Set.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Set.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60774CEA267C385E002A256F /* SetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetApp.swift; sourceTree = "<group>"; };
-		60774CEC267C385E002A256F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		60774CEC267C385E002A256F /* SetGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGameView.swift; sourceTree = "<group>"; };
 		60774CEE267C3860002A256F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		60774CF1267C3860002A256F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		60774CF3267C3860002A256F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -45,6 +51,12 @@
 		60774D03267C3860002A256F /* SetUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SetUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		60774D07267C3860002A256F /* SetUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUITests.swift; sourceTree = "<group>"; };
 		60774D09267C3860002A256F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		60774D19267C3D98002A256F /* SetGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGame.swift; sourceTree = "<group>"; };
+		60774D1B267C4CAA002A256F /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
+		60774D1D267D7A64002A256F /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		60774D1F267D7A7F002A256F /* GridLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
+		60FA26BD2683AD7400E4A401 /* Array+Identifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Identifiable.swift"; sourceTree = "<group>"; };
+		60FA26BF2683CA2800E4A401 /* CardShapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardShapes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,8 +107,14 @@
 		60774CE9267C385E002A256F /* Set */ = {
 			isa = PBXGroup;
 			children = (
+				60FA26BD2683AD7400E4A401 /* Array+Identifiable.swift */,
 				60774CEA267C385E002A256F /* SetApp.swift */,
-				60774CEC267C385E002A256F /* ContentView.swift */,
+				60774CEC267C385E002A256F /* SetGameView.swift */,
+				60774D19267C3D98002A256F /* SetGame.swift */,
+				60774D1B267C4CAA002A256F /* GameModel.swift */,
+				60FA26BF2683CA2800E4A401 /* CardShapes.swift */,
+				60774D1D267D7A64002A256F /* Grid.swift */,
+				60774D1F267D7A7F002A256F /* GridLayout.swift */,
 				60774CEE267C3860002A256F /* Assets.xcassets */,
 				60774CF3267C3860002A256F /* Info.plist */,
 				60774CF0267C3860002A256F /* Preview Content */,
@@ -259,7 +277,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				60774CED267C385E002A256F /* ContentView.swift in Sources */,
+				60774D1C267C4CAA002A256F /* GameModel.swift in Sources */,
+				60FA26C02683CA2800E4A401 /* CardShapes.swift in Sources */,
+				60774CED267C385E002A256F /* SetGameView.swift in Sources */,
+				60774D1A267C3D98002A256F /* SetGame.swift in Sources */,
+				60774D20267D7A7F002A256F /* GridLayout.swift in Sources */,
+				60774D1E267D7A64002A256F /* Grid.swift in Sources */,
+				60FA26BE2683AD7400E4A401 /* Array+Identifiable.swift in Sources */,
 				60774CEB267C385E002A256F /* SetApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
