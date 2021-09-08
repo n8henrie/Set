@@ -8,9 +8,9 @@
 //import Foundation
 
 struct GameModel {
-    private(set) var cards: Array<Card>
-    
-    init() {
+    private(set) var cards = new_game()
+
+    private static func new_game() -> Array<Card> {
         var cards = [Card]()
         var counter = 0
         for shape: CardShape in [.diamond(Diamond()), .squiggle(Squiggle()), .oval(Oval())] {
@@ -29,7 +29,10 @@ struct GameModel {
         }
         
         cards.shuffle()
-        self.cards = cards
+        for idx in 0..<12 {
+            cards[idx].visible = true
+        }
+        return cards
     }
     
     mutating func choose(card: Card) {
@@ -50,13 +53,7 @@ struct GameModel {
             }
         }
     }
-    
-    mutating func createSetGame() {
-        for idx in 0..<12 {
-            cards[idx].visible = true
-        }
-    }
-    
+        
     func is_match() -> Bool {
         let selected_cards = cards.filter({ $0.selected })
         guard selected_cards.count == 3 else {

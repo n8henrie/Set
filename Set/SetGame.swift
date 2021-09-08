@@ -12,7 +12,7 @@ class SetGame: ObservableObject {
     @Published private var model = GameModel()
     
     func createSetGame() {
-        model.createSetGame()
+        self.model = GameModel()
     }
     
     var cards: Array<GameModel.Card>  {

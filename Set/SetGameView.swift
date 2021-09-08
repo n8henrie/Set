@@ -9,25 +9,22 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var viewModel: SetGame
-    
+
     var body: some View {
-        let visible_cards = viewModel.cards.filter { card in
-            card.visible
-        }
-        
-        NavigationView {
-            Grid(visible_cards) { card in
-                CardView(card: card)
-                    .transition(.offset(randomOffset(for: card)))
-                    .animation(.easeIn.delay(delayForCard(card)))
-                    .onTapGesture {
-                        viewModel.choose(card: card)
-                    }
+        GeometryReader {geometry in
+            let visible_cards = viewModel.cards.filter { card in
+                card.visible
             }
-        }.onAppear {
-            viewModel.createSetGame()
+
+            NavigationView {
+                Grid(visible_cards) { card in
+                    CardView(card: card, geometry: geometry)
+                        .onTapGesture {
+                            viewModel.choose(card: card)
+                        }.animation(.easeIn.delay(delayForCard(card)))
+                }
+            }
         }
-        
     }
     private func delayForCard(_ card: GameModel.Card) -> Double {
         if let idx = viewModel.cards.firstIndex(matching: card) {
@@ -35,36 +32,45 @@ struct ContentView: View {
         }
         return 0
     }
-    private func randomOffset(for card: GameModel.Card) -> CGSize {
-        if let idx = viewModel.cards.firstIndex(matching: card) {
-            let w = Int.random(in: -100..<100) * idx
-            let h = Int.random(in: -100..<100) * idx
-            return CGSize(width: w, height: h)
-        }
-        return CGSize(width: 0, height: 0)
-    }
 }
 
 
 struct CardView: View {
     let card: GameModel.Card
-    
+    let geometry: GeometryProxy
+
+    @State var should_offset = true
+
     var body: some View {
-        GeometryReader { geometry in
-            ZStack {
-                if card.selected {
-                    RoundedRectangle(cornerRadius: card_corner_radius).fill(card_background_color).opacity(foreground_opacity).padding(5)
-                    RoundedRectangle(cornerRadius: card_corner_radius).fill(Color.white).padding(10)
+        ZStack {
+            if card.selected {
+                RoundedRectangle(cornerRadius: card_corner_radius).fill(card_background_color).opacity(foreground_opacity).padding(5)
+                RoundedRectangle(cornerRadius: card_corner_radius).fill(Color.white).padding(10)
+            }
+            RoundedRectangle(cornerRadius: card_corner_radius).fill(card_background_color).opacity(background_opacity).padding(5)
+            VStack(spacing: 1) {
+                ForEach (0..<card.num_shapes) { _ in
+                    get_shape()
                 }
-                RoundedRectangle(cornerRadius: card_corner_radius).fill(card_background_color).opacity(background_opacity).padding(5)
-                VStack(spacing: 1) {
-                    ForEach (0..<card.num_shapes) { _ in
-                        get_shape()
-                    }
-                }.padding(15)
-            }.padding(5)
+            }.padding(15)
+        }.padding(5)
+        .offset(
+            x: should_offset ? randomOffset(more_than: geometry.size.width) : 0,
+            y: should_offset ? randomOffset(more_than: geometry.size.height) : 0)
+        .animation(.spring())
+        .onAppear {
+            should_offset = false
         }
     }
+
+    private func randomOffset(more_than: CGFloat) -> CGFloat {
+        print(more_than)
+        let minimum = Int(more_than) + 1
+        let base = Int.random(in: minimum..<2*minimum)
+        let multiplier = [-1, 1].randomElement()!;
+        return CGFloat(base * multiplier)
+    }
+
     
     @ViewBuilder
     private func get_shape() -> some View {
@@ -99,7 +105,7 @@ struct CardView: View {
             return .green
         }
     }
-    
+
     //        @ViewBuilder
     //        private func fill() -> some View {
     //            switch card.shading {
